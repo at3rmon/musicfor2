@@ -8,6 +8,13 @@
 </head>
 
 <body>
+    @auth
+        {{ auth()->user()->first_name }}
+        <form action={{ route('auth.destroy') }} method="post">
+            @csrf
+            <button type="submit">logout</button>
+        </form>
+    @endauth
     @yield('content')
 </body>
 
