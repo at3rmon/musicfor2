@@ -16,7 +16,9 @@
             <button type="submit">logout</button>
         </form>
     @endauth
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 </body>
 
 </html>

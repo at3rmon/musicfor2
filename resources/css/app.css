@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.default-input {
+    @apply input input-ghost focus:outline-none focus:border-primary w-full bg-neutral-focus;
+}
