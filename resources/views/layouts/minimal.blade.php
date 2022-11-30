@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    @include('components.navigations.main')
     <main>
         @yield('content')
     </main>

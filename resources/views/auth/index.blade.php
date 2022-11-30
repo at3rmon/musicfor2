@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.minimal')
 
 @section('content')
     <div class="flex justify-center items-center w-full min-h-screen">

@@ -17,7 +17,7 @@ class AuthenticationController extends Controller
         if (!Auth::attempt($request->only(['email', 'password']))) {
             return back()->withErrors([
                 'email' =>  __('auth.failed')
-            ]);
+            ])->withInput($request->only('email'));
         }
 
         $request->session()->regenerate();
