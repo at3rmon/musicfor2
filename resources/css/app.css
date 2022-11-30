@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.default-input {
-    @apply input input-ghost focus:outline-none focus:border-primary w-full bg-neutral-focus;
+.form-input {
+    @apply input input-ghost focus:outline-none focus:border-primary w-full bg-neutral-focus form-control;
+}
+
+.form-submit {
+    @apply btn btn-primary;
 }

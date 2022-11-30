@@ -9,7 +9,9 @@
 </head>
 
 <body>
-    @include('components.navigations.main')
+    <header>
+        @include('components.navigations.main')
+    </header>
     <main>
         @yield('content')
     </main>

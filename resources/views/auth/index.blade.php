@@ -7,12 +7,11 @@
             <form action={{ route('auth.create') }} method="post" class="mt-4 flex flex-col gap-2">
                 @csrf
 
-                @include('components.inputs.email')
+                @include('components.form.email')
 
-                @include('components.inputs.password')
+                @include('components.form.password')
 
-                @include('components.inputs.submit')
-
+                @include('components.form.submit')
             </form>
 
             @if ($errors->any())

@@ -14,10 +14,7 @@
                 <li><a href="{{ route('home') }}" class="whitespace-nowrap">{{ auth()->user()->first_name }}'s
                         Profile</a></li>
                 <li>
-                    <form action={{ route('auth.destroy') }} method="post">
-                        @csrf
-                        <button type="submit">Logout</button>
-                    </form>
+                    @include('components.form.logout')
                 </li>
             </ul>
         </div>
