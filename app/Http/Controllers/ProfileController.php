@@ -16,6 +16,7 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request)
     {
         User::find(Auth::id())->update($request->only('first_name', 'last_name'));
+
         return redirect(route('profile.edit'))->with(['success' => 'User info was updated']);
     }
 }

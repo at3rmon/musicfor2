@@ -25,7 +25,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'first_name' => ['required', 'max:255'],
-            'last_name' => ['required', 'max:255']
+            'last_name' => ['required', 'max:255'],
         ];
     }
 }

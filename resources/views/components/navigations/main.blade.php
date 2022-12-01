@@ -8,7 +8,7 @@
                 <div class="bg-neutral-focus text-neutral-content rounded-full w-full h-full">
                     <span class="text-2xl">
                         @php
-                            echo substr(auth()->user()->first_name, 0, 1) . substr(auth()->user()->last_name, 0, 1);
+                            echo mb_substr(auth()->user()->first_name, 0, 1) . mb_substr(auth()->user()->last_name, 0, 1);
                         @endphp
                     </span>
                 </div>

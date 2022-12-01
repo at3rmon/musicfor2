@@ -14,19 +14,21 @@ class AuthenticationController extends Controller
 
     public function create(AuthenticationRequest $request)
     {
-        if (!Auth::attempt($request->only(['email', 'password']))) {
+        if (! Auth::attempt($request->only(['email', 'password']))) {
             return back()->withErrors([
-                'email' =>  __('auth.failed')
+                'email' => __('auth.failed'),
             ])->withInput($request->only('email'));
         }
 
         $request->session()->regenerate();
+
         return redirect()->intended('/');
     }
 
     public function destroy()
     {
         Auth::logout();
+
         return redirect('/');
     }
 }

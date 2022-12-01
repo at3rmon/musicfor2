@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Helpers\StringConverter;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,23 +50,23 @@ class User extends Authenticatable
     protected function firstName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ucfirst($value),
-            set: fn ($value) => strtolower($value)
+            get: fn ($value) => mb_convert_case($value, MB_CASE_TITLE),
+            set: fn ($value) => StringConverter::setup(mb_strtolower($value))
         );
     }
 
     protected function lastName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => ucfirst($value),
-            set: fn ($value) => strtolower($value)
+            get: fn ($value) => mb_convert_case($value, MB_CASE_TITLE),
+            set: fn ($value) => StringConverter::setup(mb_strtolower($value))
         );
     }
 
     protected function email(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => strtolower($value)
+            set: fn ($value) => mb_strtolower($value)
         );
     }
 
