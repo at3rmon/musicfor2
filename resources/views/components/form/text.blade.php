@@ -1,6 +1,6 @@
 @if (empty($name))
     @php
-        $name = 'email';
+        $name = 'text';
     @endphp
 @endif
 
@@ -40,5 +40,5 @@
     @endphp
 @endif
 
-<input type="email" name="{{ $name }}" placeholder="{{ $placeholder }}" value="{{ $value }}"
+<input type="text" name="{{ $name }}" placeholder="{{ $placeholder }}" value="{{ $value }}"
     class="{{ $class }}" @disabled($disabled)>
