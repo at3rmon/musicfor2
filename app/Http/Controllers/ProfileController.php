@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     public function edit()
     {
-        $departments = Auth::user()->departments()->get();
-
-        return view('profile.edit', compact('departments'));
+        return view('profile.edit')->with([
+            'departments' => Auth::user()->departments()->get(),
+        ]);
     }
 
     public function update(UpdateProfileRequest $request)
     {
-        User::find(Auth::id())->update($request->only('first_name', 'last_name'));
+        Auth::user()->update($request->only('first_name', 'last_name'));
 
         return redirect(route('profile.edit'))->with(['success' => 'User info was updated']);
     }

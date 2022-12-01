@@ -18,7 +18,7 @@ class DepartmentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class DepartmentPolicy
      */
     public function view(User $user, Department $department)
     {
-        //
+        return in_array($department->id, $user->departments()->allRelatedIds()->toArray());
     }
 
     /**
@@ -41,7 +41,7 @@ class DepartmentPolicy
      */
     public function create(User $user)
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class DepartmentPolicy
      */
     public function update(User $user, Department $department)
     {
-        //
+        return false;
     }
 
     /**
@@ -65,7 +65,7 @@ class DepartmentPolicy
      */
     public function delete(User $user, Department $department)
     {
-        //
+        return false;
     }
 
     /**
@@ -77,7 +77,7 @@ class DepartmentPolicy
      */
     public function restore(User $user, Department $department)
     {
-        //
+        return false;
     }
 
     /**
@@ -89,6 +89,6 @@ class DepartmentPolicy
      */
     public function forceDelete(User $user, Department $department)
     {
-        //
+        return false;
     }
 }

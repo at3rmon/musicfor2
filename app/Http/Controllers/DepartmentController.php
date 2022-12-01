@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
+use App\Models\Department;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +15,9 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('departments.index')->with([
+            'departments' => Department::all(),
+        ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('departments.create');
     }
 
     /**
@@ -36,7 +38,9 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request)
     {
-        //
+        Department::create($request->only('name'));
+
+        return redirect(route('departments.index'))->with(['success' => 'New department was created']);
     }
 
     /**
@@ -47,7 +51,9 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        //
+        $this->authorize('view', $department);
+
+        return view('departments.show', compact('department'));
     }
 
     /**
@@ -58,7 +64,7 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
-        //
+        return view('departments.edit', compact('department'));
     }
 
     /**
@@ -70,7 +76,9 @@ class DepartmentController extends Controller
      */
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
-        //
+        $department->update($request->only('name'));
+
+        return redirect(route('departments.show', $department))->with(['success' => 'Department info was updated']);
     }
 
     /**
@@ -81,6 +89,8 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $department->delete();
+
+        return redirect(route('departments.index'))->with(['success' => 'Department was deleted']);
     }
 }

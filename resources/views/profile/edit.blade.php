@@ -12,7 +12,7 @@
         </div>
     @endif
     <div class="grid grid-cols-12 gap-4">
-        <section class="p-8 rounded-md w-full bg-neutral text-neutral-content col-span-12 md:col-span-6">
+        <section class="p-8 rounded-md w-full bg-neutral text-neutral-content col-span-12 md:col-span-4">
             <h2 class="text-3xl font-semibold text-center">{{ __('forms.update_profile.title') }}</h2>
             <form action="{{ route('profile.update') }}" method="POST" class="mt-4 flex flex-col gap-2">
                 @csrf
@@ -39,10 +39,20 @@
                 </ul>
             @endif
         </section>
-        <section>
-            @foreach ($departments as $department)
-                {{ $department->name }}
-            @endforeach
-        </section>
+        @if ($departments->count() > 0)
+            <section class="p-8 rounded-md w-full bg-neutral text-neutral-content col-span-12 md:col-span-4">
+                <h2 class="text-3xl font-semibold text-center">My Departments</h2>
+                <div class="mt-4 flex flex-col gap-2">
+                    @foreach ($departments as $department)
+                        <article class="bg-base-300 p-4 rounded-md">
+                            <a href="{{ route('departments.show', $department->id) }}"
+                                class="link-primary font-bold text-lg">
+                                {{ $department->name }}
+                            </a>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+        @endif
     </div>
 @endsection

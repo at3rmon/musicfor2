@@ -14,7 +14,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        Department::insert([
+        $departments = [
             ['name' => 'guitarfor'],
             ['name' => 'bassfor'],
             ['name' => 'drumsfor'],
@@ -22,6 +22,10 @@ class DepartmentSeeder extends Seeder
             ['name' => 'pianofor'],
             ['name' => 'saxfor'],
             ['name' => 'songwritingfor'],
-        ]);
+        ];
+
+        foreach ($departments as $department) {
+            Department::create($department);
+        }
     }
 }
