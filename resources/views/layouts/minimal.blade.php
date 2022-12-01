@@ -8,10 +8,8 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
-    <main>
-        @yield('content')
-    </main>
+<body class="h-screen flex justify-center items-center px-4">
+    @yield('content')
 </body>
 
 </html>

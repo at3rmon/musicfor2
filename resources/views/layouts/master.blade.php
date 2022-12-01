@@ -8,11 +8,11 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="h-screen">
     <header>
         @include('components.navigations.main')
     </header>
-    <main>
+    <main class="container mx-auto my-8 px-4">
         @yield('content')
     </main>
 </body>
