@@ -212,6 +212,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
         'StringConverter' => App\Helpers\StringConverter::class,
+        'LaravelIdeHelper' => Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ])->toArray(),
 
 ];

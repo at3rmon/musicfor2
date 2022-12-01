@@ -39,5 +39,10 @@
                 </ul>
             @endif
         </section>
+        <section>
+            @foreach ($departments as $department)
+                {{ $department->name }}
+            @endforeach
+        </section>
     </div>
 @endsection

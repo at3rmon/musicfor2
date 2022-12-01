@@ -10,7 +10,9 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('profile.edit');
+        $departments = Auth::user()->departments()->get();
+
+        return view('profile.edit', compact('departments'));
     }
 
     public function update(UpdateProfileRequest $request)
