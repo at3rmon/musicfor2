@@ -3,18 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function edit()
+    /**
+     * @return View
+     */
+    public function edit(): View
     {
         return view('profile.edit')->with([
             'departments' => Auth::user()->departments()->get(),
         ]);
     }
 
-    public function update(UpdateProfileRequest $request)
+    /**
+     * @param  UpdateProfileRequest  $request
+     * @return RedirectResponse
+     */
+    public function update(UpdateProfileRequest $request): RedirectResponse
     {
         Auth::user()->update($request->only('first_name', 'last_name'));
 

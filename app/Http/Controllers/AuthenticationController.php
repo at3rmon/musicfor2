@@ -3,18 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthenticationRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends Controller
 {
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
         return view('auth.index');
     }
 
-    public function create(AuthenticationRequest $request)
+    /**
+     * @param  AuthenticationRequest  $request
+     * @return RedirectResponse
+     */
+    public function create(AuthenticationRequest $request): RedirectResponse
     {
-        if (! Auth::attempt($request->only(['email', 'password']))) {
+        if (!Auth::attempt($request->only(['email', 'password']))) {
             return back()->withErrors([
                 'email' => __('auth.failed'),
             ])->withInput($request->only('email'));
@@ -22,10 +31,13 @@ class AuthenticationController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/');
+        return redirect()->intended();
     }
 
-    public function destroy()
+    /**
+     * @return RedirectResponse
+     */
+    public function destroy(): RedirectResponse
     {
         Auth::logout();
 

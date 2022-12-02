@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -53,7 +52,7 @@ class User extends Authenticatable
     /**
      * Get related role
      *
-     * @return HasOne
+     * @return BelongsTo
      */
     public function role(): BelongsTo
     {
@@ -73,30 +72,30 @@ class User extends Authenticatable
     protected function firstName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => mb_convert_case($value, MB_CASE_TITLE),
-            set: fn ($value) => StringConverter::setup(mb_strtolower($value))
+            get: fn($value) => mb_convert_case($value, MB_CASE_TITLE),
+            set: fn($value) => StringConverter::setup(mb_strtolower($value))
         );
     }
 
     protected function lastName(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => mb_convert_case($value, MB_CASE_TITLE),
-            set: fn ($value) => StringConverter::setup(mb_strtolower($value))
+            get: fn($value) => mb_convert_case($value, MB_CASE_TITLE),
+            set: fn($value) => StringConverter::setup(mb_strtolower($value))
         );
     }
 
     protected function email(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => mb_strtolower($value)
+            set: fn($value) => mb_strtolower($value)
         );
     }
 
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => Hash::make($value)
+            set: fn($value) => Hash::make($value)
         );
     }
 }

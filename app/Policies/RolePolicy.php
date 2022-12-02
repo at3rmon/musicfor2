@@ -14,10 +14,10 @@ class RolePolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return true;
     }
@@ -25,11 +25,11 @@ class RolePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @param  Role  $role
+     * @return bool
      */
-    public function view(User $user, Role $role)
+    public function view(User $user, Role $role): bool
     {
         return $user->role->id === RoleEnum::SUPERADMIN;
     }
@@ -37,10 +37,10 @@ class RolePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
         return $user->role->id === RoleEnum::SUPERADMIN;
     }
@@ -48,11 +48,11 @@ class RolePolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @param  Role  $role
+     * @return bool
      */
-    public function update(User $user, Role $role)
+    public function update(User $user, Role $role): bool
     {
         return $user->role->id === RoleEnum::SUPERADMIN;
     }
@@ -60,11 +60,11 @@ class RolePolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @param  Role  $role
+     * @return bool
      */
-    public function delete(User $user, Role $role)
+    public function delete(User $user, Role $role): bool
     {
         return $user->role->id === RoleEnum::SUPERADMIN;
     }
@@ -72,11 +72,11 @@ class RolePolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @param  Role  $role
+     * @return bool
      */
-    public function restore(User $user, Role $role)
+    public function restore(User $user, Role $role): bool
     {
         return $user->role->id === RoleEnum::SUPERADMIN;
     }
@@ -84,11 +84,11 @@ class RolePolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param  User  $user
+     * @param  Role  $role
+     * @return bool
      */
-    public function forceDelete(User $user, Role $role)
+    public function forceDelete(User $user, Role $role): bool
     {
         return $user->role->id === RoleEnum::SUPERADMIN;
     }

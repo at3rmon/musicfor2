@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
 use App\Models\Department;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response|View
+     * @throws AuthorizationException
      */
-    public function index()
+    public function index(): Response|View
     {
         $this->authorize(Department::class);
 
@@ -25,9 +30,10 @@ class DepartmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
+     * @throws AuthorizationException
      */
-    public function create()
+    public function create(): View
     {
         $this->authorize(Department::class);
 
@@ -37,10 +43,11 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDepartmentRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  StoreDepartmentRequest  $request
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function store(StoreDepartmentRequest $request)
+    public function store(StoreDepartmentRequest $request): RedirectResponse
     {
         $this->authorize(Department::class);
         Department::create($request->only('name'));
@@ -51,10 +58,11 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param  Department  $department
+     * @return View
+     * @throws AuthorizationException
      */
-    public function show(Department $department)
+    public function show(Department $department): View
     {
         $this->authorize('view', $department);
 
@@ -64,10 +72,11 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param  Department  $department
+     * @return View
+     * @throws AuthorizationException
      */
-    public function edit(Department $department)
+    public function edit(Department $department): View
     {
         $this->authorize('update', $department);
 
@@ -77,11 +86,12 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateDepartmentRequest  $request
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param  UpdateDepartmentRequest  $request
+     * @param  Department  $department
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function update(UpdateDepartmentRequest $request, Department $department)
+    public function update(UpdateDepartmentRequest $request, Department $department): RedirectResponse
     {
         $this->authorize('update', $department);
         $department->update($request->only('name'));
@@ -92,10 +102,11 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Department  $department
-     * @return \Illuminate\Http\Response
+     * @param  Department  $department
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
-    public function destroy(Department $department)
+    public function destroy(Department $department): RedirectResponse
     {
         $this->authorize('delete', $department);
         $department->delete();

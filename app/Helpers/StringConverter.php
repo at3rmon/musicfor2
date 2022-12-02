@@ -13,10 +13,19 @@ class StringConverter
      */
     public static function setup(string $string): string
     {
+        /**
+         * Replace 'σ' as the last character
+         */
         $string = preg_replace('/σ$/', 'ς', $string);
-        $string = preg_replace('/σ /', 'ς ', $string);
-        $string = preg_replace('/\s\s+/', ' ', $string);
 
-        return $string;
+        /**
+         * Replace 'σ' as a character before white space
+         */
+        $string = preg_replace('/σ /', 'ς ', $string);
+
+        /**
+         * Trims extra white spaces
+         */
+        return preg_replace('/\s\s+/', ' ', $string);
     }
 }
