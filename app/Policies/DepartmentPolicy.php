@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Helpers\RoleEnum;
 use App\Models\Department;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -31,9 +32,9 @@ class DepartmentPolicy
     public function view(User $user, Department $department)
     {
         return in_array($department->id, $user->departments()->allRelatedIds()->toArray())
-        || $user->role->id === User::SUPERADMIN
-        || $user->role->id === User::ADMIN
-        || $user->role->id === user::TEACHER;
+        || $user->role->id === RoleEnum::SUPERADMIN
+        || $user->role->id === RoleEnum::ADMIN
+        || $user->role->id === RoleEnum::TEACHER;
     }
 
     /**
@@ -44,8 +45,8 @@ class DepartmentPolicy
      */
     public function create(User $user)
     {
-        return $user->role->id === User::SUPERADMIN
-        || $user->role->id === User::ADMIN;
+        return $user->role->id === RoleEnum::SUPERADMIN
+        || $user->role->id === RoleEnum::ADMIN;
     }
 
     /**
@@ -57,9 +58,9 @@ class DepartmentPolicy
      */
     public function update(User $user, Department $department)
     {
-        return $user->role->id === User::SUPERADMIN
-        || $user->role->id === User::ADMIN
-        || ($user->role->id === User::TEACHER && in_array($department->id, $user->departments()->allRelatedIds()->toArray()));
+        return $user->role->id === RoleEnum::SUPERADMIN
+        || $user->role->id === RoleEnum::ADMIN
+        || ($user->role->id === RoleEnum::TEACHER && in_array($department->id, $user->departments()->allRelatedIds()->toArray()));
     }
 
     /**
@@ -71,7 +72,7 @@ class DepartmentPolicy
      */
     public function delete(User $user, Department $department)
     {
-        return $user->role->id === User::SUPERADMIN;
+        return $user->role->id === RoleEnum::SUPERADMIN;
     }
 
     /**
@@ -83,7 +84,7 @@ class DepartmentPolicy
      */
     public function restore(User $user, Department $department)
     {
-        return  $user->role->id === User::SUPERADMIN;
+        return  $user->role->id === RoleEnum::SUPERADMIN;
     }
 
     /**
@@ -95,6 +96,6 @@ class DepartmentPolicy
      */
     public function forceDelete(User $user, Department $department)
     {
-        return  $user->role->id === User::SUPERADMIN;
+        return  $user->role->id === RoleEnum::SUPERADMIN;
     }
 }
