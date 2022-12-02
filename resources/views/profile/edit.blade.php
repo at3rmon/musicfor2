@@ -40,7 +40,7 @@
             @endif
         </section>
         @if ($departments->count() > 0)
-            <section class="p-8 rounded-md w-full bg-neutral text-neutral-content col-span-12 md:col-span-4">
+            <section class="p-8 rounded-md w-full bg-neutral text-neutral-content col-span-12 md:col-span-4 flex flex-col">
                 <h2 class="text-3xl font-semibold text-center">My Departments</h2>
                 <div class="mt-4 flex flex-col gap-2">
                     @foreach ($departments as $department)
@@ -52,6 +52,7 @@
                         </article>
                     @endforeach
                 </div>
+                <a href="{{ route('departments.index') }}" class="link-primary font-bold mt-auto">All Departments</a>
             </section>
         @endif
     </div>

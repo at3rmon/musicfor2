@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Department;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class DepartmentPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -25,15 +25,12 @@ class DepartmentPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Department $department)
+    public function view(User $user, Role $role)
     {
-        return in_array($department->id, $user->departments()->allRelatedIds()->toArray())
-        || $user->role->id === User::SUPERADMIN
-        || $user->role->id === User::ADMIN
-        || $user->role->id === user::TEACHER;
+        return $user->role->id === User::SUPERADMIN;
     }
 
     /**
@@ -44,32 +41,29 @@ class DepartmentPolicy
      */
     public function create(User $user)
     {
-        return $user->role->id === User::SUPERADMIN
-        || $user->role->id === User::ADMIN;
+        return $user->role->id === User::SUPERADMIN;
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Department $department)
+    public function update(User $user, Role $role)
     {
-        return $user->role->id === User::SUPERADMIN
-        || $user->role->id === User::ADMIN
-        || ($user->role->id === User::TEACHER && in_array($department->id, $user->departments()->allRelatedIds()->toArray()));
+        return $user->role->id === User::SUPERADMIN;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Department $department)
+    public function delete(User $user, Role $role)
     {
         return $user->role->id === User::SUPERADMIN;
     }
@@ -78,23 +72,23 @@ class DepartmentPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Department $department)
+    public function restore(User $user, Role $role)
     {
-        return  $user->role->id === User::SUPERADMIN;
+        return $user->role->id === User::SUPERADMIN;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Department  $department
+     * @param  \App\Models\Role  $role
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Department $department)
+    public function forceDelete(User $user, Role $role)
     {
-        return  $user->role->id === User::SUPERADMIN;
+        return $user->role->id === User::SUPERADMIN;
     }
 }

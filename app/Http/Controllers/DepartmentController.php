@@ -15,6 +15,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
+        $this->authorize(Department::class);
+
         return view('departments.index')->with([
             'departments' => Department::all(),
         ]);
@@ -27,6 +29,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
+        $this->authorize(Department::class);
+
         return view('departments.create');
     }
 
@@ -38,6 +42,7 @@ class DepartmentController extends Controller
      */
     public function store(StoreDepartmentRequest $request)
     {
+        $this->authorize(Department::class);
         Department::create($request->only('name'));
 
         return redirect(route('departments.index'))->with(['success' => 'New department was created']);
@@ -64,6 +69,8 @@ class DepartmentController extends Controller
      */
     public function edit(Department $department)
     {
+        $this->authorize('update', $department);
+
         return view('departments.edit', compact('department'));
     }
 
@@ -76,6 +83,7 @@ class DepartmentController extends Controller
      */
     public function update(UpdateDepartmentRequest $request, Department $department)
     {
+        $this->authorize('update', $department);
         $department->update($request->only('name'));
 
         return redirect(route('departments.show', $department))->with(['success' => 'Department info was updated']);
@@ -89,6 +97,7 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
+        $this->authorize('delete', $department);
         $department->delete();
 
         return redirect(route('departments.index'))->with(['success' => 'Department was deleted']);
